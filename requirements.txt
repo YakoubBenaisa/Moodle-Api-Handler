@@ -1,0 +1,32 @@
+# Django framework
+Django>=5.1.0,<5.2.0
+djangorestframework>=3.14.0
+
+# HTTP requests
+requests>=2.31.0
+
+# HTML parsing
+beautifulsoup4>=4.12.0
+
+# For handling JSON
+simplejson>=3.19.0
+
+# For caching session data
+django-redis>=5.4.0
+
+# For UUID generation
+uuid>=1.30
+
+# For environment variables
+python-dotenv>=1.0.0
+
+# For CORS support
+django-cors-headers>=4.3.0
+
+# For production deployment
+gunicorn>=21.2.0
+whitenoise>=6.6.0
+
+# For development
+black>=23.10.0
+flake8>=6.1.0
