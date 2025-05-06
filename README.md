@@ -75,6 +75,23 @@ The API provides the following endpoints:
 
 For a complete API reference, import the `moodle_api_collection.json` file into Postman.
 
+## Session Token Security
+
+This API uses a secure session token approach to maintain authentication state:
+
+- When a user logs in with valid Moodle credentials, the API generates a unique session token (UUID)
+- The session token serves as a reference key to the user's Moodle session cookies stored in the server's cache
+- No sensitive credentials are stored in the database or persistent storage
+- Session tokens expire after 2 hours of inactivity
+- All subsequent API requests require this session token as a query parameter
+- The server reconstructs the authenticated session for each request using the cached cookies
+
+This approach provides several security benefits:
+- Credentials are never stored, only the cookies needed to maintain the Moodle session
+- Session tokens are randomly generated UUIDs, making them difficult to guess
+- The temporary cache storage ensures sessions are automatically cleaned up
+- No sensitive data is exposed to the client beyond the session token itself
+
 ## Configuration
 
 Edit `moodle/settings.py` to configure database settings, allowed hosts, and other Django settings.
@@ -84,6 +101,8 @@ Edit `moodle/settings.py` to configure database settings, allowed hosts, and oth
 - The default settings include `DEBUG=True` which should be disabled in production
 - Update the `SECRET_KEY` before deploying to production
 - Configure proper `ALLOWED_HOSTS` for production environments
+- Consider implementing rate limiting for the login endpoint
+- For production, ensure HTTPS is enforced for all API endpoints
 
 ## License
 
