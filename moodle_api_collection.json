@@ -1,0 +1,173 @@
+{
+  "info": {
+    "name": "Moodle API",
+    "description": "API for accessing Moodle e-learning platform data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"your_username\",\n  \"password\": \"your_password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "login"]
+            },
+            "description": "Authenticates a user with Moodle credentials and returns a session token that must be used for subsequent requests."
+          },
+          "response": [
+            {
+              "name": "Successful Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"test_user\",\n  \"password\": \"test_password\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/login/"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n  \"session_token\": \"550e8400-e29b-41d4-a716-446655440000\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Authentication endpoints for the Moodle API"
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Fetch Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categories/?session_token={{session_token}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"],
+              "query": [
+                {
+                  "key": "session_token",
+                  "value": "{{session_token}}",
+                  "description": "Session token obtained from login"
+                }
+              ]
+            },
+            "description": "Retrieves all course categories available to the authenticated user."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for retrieving course categories"
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Fetch Courses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/courses/?session_token={{session_token}}&id={{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "courses"],
+              "query": [
+                {
+                  "key": "session_token",
+                  "value": "{{session_token}}",
+                  "description": "Session token obtained from login"
+                },
+                {
+                  "key": "id",
+                  "value": "{{category_id}}",
+                  "description": "Category ID to fetch courses from"
+                }
+              ]
+            },
+            "description": "Retrieves all courses within a specific category."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for retrieving course information"
+    },
+    {
+      "name": "Chapters",
+      "item": [
+        {
+          "name": "Fetch Chapters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/chapters/?session_token={{session_token}}&id={{course_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "chapters"],
+              "query": [
+                {
+                  "key": "session_token",
+                  "value": "{{session_token}}",
+                  "description": "Session token obtained from login"
+                },
+                {
+                  "key": "id",
+                  "value": "{{course_id}}",
+                  "description": "Course ID to fetch chapters from"
+                }
+              ]
+            },
+            "description": "Retrieves all chapters and sections within a specific course."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for retrieving course chapter information"
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    {
+      "key": "session_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "category_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "course_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
