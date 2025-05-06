@@ -145,6 +145,64 @@
         }
       ],
       "description": "Endpoints for retrieving course chapter information"
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "Fetch Resource",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/resources/?session_token={{session_token}}&id={{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"],
+              "query": [
+                {
+                  "key": "session_token",
+                  "value": "{{session_token}}",
+                  "description": "Session token obtained from login"
+                },
+                {
+                  "key": "id",
+                  "value": "{{resource_id}}",
+                  "description": "Resource ID to fetch"
+                }
+              ]
+            },
+            "description": "Retrieves a specific resource file (PDF, document, etc.) from Moodle."
+          },
+          "response": [
+            {
+              "name": "Successful Resource Fetch",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/resources/?session_token={{session_token}}&id=12345"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "binary",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                },
+                {
+                  "key": "Content-Disposition",
+                  "value": "inline; filename=\"lecture_notes.pdf\""
+                }
+              ],
+              "cookie": [],
+              "body": "[Binary PDF Content]"
+            }
+          ]
+        }
+      ],
+      "description": "Endpoints for retrieving resource files from Moodle"
     }
   ],
   "variable": [
@@ -166,6 +224,11 @@
     },
     {
       "key": "course_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "resource_id",
       "value": "",
       "type": "string"
     }
