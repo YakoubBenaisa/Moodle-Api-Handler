@@ -12,6 +12,7 @@ This project provides a RESTful API interface to interact with Moodle learning m
 - Course content retrieval
 - Chapter/section management
 - Course structure navigation
+- Resource/PDF document retrieval
 
 ## Getting Started
 
@@ -59,12 +60,18 @@ The API provides the following endpoints:
 - **Authentication**
   - POST `/api/login/` - Authenticate and receive a session token
 
+- **Categories**
+  - GET `/api/categories/` - List all available course categories
+
 - **Courses**
   - GET `/api/courses/` - List all available courses
   - GET `/api/courses/{id}/` - Get details for a specific course
 
 - **Chapters**
-  - GET `/api/courses/{id}/chapters/` - Get all chapters/sections for a course
+  - GET `/api/chapters/` - Get all chapters/sections for a course
+
+- **Resources**
+  - GET `/api/resources/` - Retrieve PDF and other resource files
 
 For a complete API reference, import the `moodle_api_collection.json` file into Postman.
 
