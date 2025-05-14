@@ -12,7 +12,8 @@ def login(username, password):
     response = session.get(login_url)
     soup = BeautifulSoup(response.text, "html.parser")
     login_token = soup.find("input", {"name": "logintoken"})["value"]
-
+    with open("login.html", "w", encoding="utf-8") as f:
+        f.write(response.text)
     login_data = {
         "username": username,
         "password": password,
@@ -21,7 +22,8 @@ def login(username, password):
 
     response = session.post(login_url, data=login_data)
     if response.status_code != 200 or "La connexion a échoué, veuillez réessayer" in response.text:
-        raise Exception("[-] Login failed")
+        return "Login failed"
+        #raise Exception("[-] Login failed")
     if "Utilisateurs en ligne" in response.text:
         print("[+] Login successful")
         cookies_dict = session.cookies.get_dict()
@@ -31,4 +33,3 @@ def login(username, password):
 
 
 
-login("yakoub.benaissa", "aLnmftOM")

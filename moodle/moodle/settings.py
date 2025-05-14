@@ -125,3 +125,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ALLOWED_HOSTS=['*']
+
+
+# For beat scheduler
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'scrape-notifications-every-5-minutes': {
+        'task': 'api.tasks.scrape_notifications',
+        'schedule': crontab(minute='*/5'),
+    },
+}
+
+# Webhook URL for sending new notifications
+NOTIFICATION_WEBHOOK_URL = "http://localhost:8001/api/new_notification/"  # adjust this
