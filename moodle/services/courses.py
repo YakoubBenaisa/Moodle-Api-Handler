@@ -6,10 +6,10 @@ import re
 import os
 
 
-def get_courses(session, id):
+def get_courses(session, id, university_name):
     # Make the request to get the category page
     print(f"Fetching courses for category ID: {id}")
-    response = session.get(f"https://elearning.univ-bba.dz/course/index.php?categoryid={id}")
+    response = session.get(f"https://elearning.univ-{university_name}.dz/course/index.php?categoryid={id}")
     
     # Save the HTML for debugging
     with open("courses_debug.html", "w", encoding="utf-8") as f:

@@ -7,8 +7,8 @@ import re
 import os
 
 
-def get_chapters(session, id):
-    response = session.get(f"https://elearning.univ-bba.dz/course/view.php?id={id}")
+def get_chapters(session, id, university_name):
+    response = session.get(f"https://elearning.univ-{university_name}.dz/course/view.php?id={id}")
     
  
     

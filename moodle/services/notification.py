@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class MoodleTerminator:
-    def __init__(self, session_cookies):
+    def __init__(self, session_cookies, university_name):
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
@@ -24,7 +24,7 @@ class MoodleTerminator:
     def get_notifications(self):
         # Step 1: Load the main page to retrieve sesskey and userId
         resp = self.session.get(
-            'https://elearning.univ-bba.dz/',
+            f'https://elearning.univ-{university_name}.dz/',
             headers={'Referer': 'https://google.com'}
         )
         resp.raise_for_status()

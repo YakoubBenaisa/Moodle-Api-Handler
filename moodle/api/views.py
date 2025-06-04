@@ -29,7 +29,7 @@ def login(request):
     if not username or not password:
         return Response({'error': 'Missing credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
-    cookies_json = login_service(username, password)
+    cookies_json = login_service(username, password, "bba")
 
     if cookies_json == "Login failed":
         return Response({'error': 'Login failed'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -144,7 +144,7 @@ def fetch_category(request):
 
 
 
-    courses = get_categories(session)
+    courses = get_categories(session, 'bba')
 
 
     return Response({'data': courses})
@@ -163,7 +163,7 @@ def fetch_courses(request):
     session.cookies.update(json.loads(cookie_json))
 
     id = request.query_params.get('id')
-    data = get_courses(session, id)
+    data = get_courses(session, id, 'bba')
 
 
     return Response({'data': data})
@@ -182,7 +182,7 @@ def fetch_chapters(request):
     session.cookies.update(json.loads(cookie_json))
 
     id = request.query_params.get('id')
-    data = get_chapters(session, id)
+    data = get_chapters(session, id, 'bba')
 
     return Response({'data': data})
 
@@ -203,7 +203,7 @@ def fetch_resource(request):
     session.cookies.update(json.loads(cookie_json))
 
     # Use the service to get the resource
-    result = get_resource(session, resource_id)
+    result = get_resource(session, resource_id, 'bba')
 
     if 'error' in result:
         return Response({'error': result['error']}, status=status.HTTP_404_NOT_FOUND)
@@ -243,7 +243,7 @@ def scrape_and_store_notifications(request):
 
     # Step 2: Scrape notifications using MoodleTerminator
     try:
-        notifications = get_notifications(session_cookies)
+        notifications = get_notifications(session_cookies, 'bba')
 
         if not notifications:
             return JsonResponse({'status': 'No notifications found'})

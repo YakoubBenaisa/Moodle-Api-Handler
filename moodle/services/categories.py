@@ -1,6 +1,6 @@
 
 
-def get_categories(session):
+def get_categories(session, university_name):
     import requests
     import json
     from bs4 import BeautifulSoup
@@ -8,7 +8,7 @@ def get_categories(session):
 
 
     # Otherwise fetch it from the website
-    response = session.get("https://elearning.univ-bba.dz/course/index.php")
+    response = session.get(f"https://elearning.univ-{university_name}.dz/course/index.php")
     html_content = response.text
     # Save for future reference
     #with open("courses.html", "w", encoding="utf-8") as f:

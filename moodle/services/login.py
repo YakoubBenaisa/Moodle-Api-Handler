@@ -3,10 +3,10 @@ import requests, json
 from bs4 import BeautifulSoup
 
 
-def login(username, password):
+def login(username, password, university_name):
 
 
-    login_url = "https://elearning.univ-bba.dz/login/index.php"
+    login_url = f"https://elearning.univ-{university_name}.dz/login/index.php"
 
     session = requests.Session()
     response = session.get(login_url)

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def get_resource(session, resource_id):
+def get_resource(session, resource_id, university_name):
     """
     Fetches a resource (like PDF) from Moodle
     
@@ -14,7 +14,7 @@ def get_resource(session, resource_id):
               or error message if failed
     """
    
-    url = f"https://elearning.univ-bba.dz/mod/resource/view.php?id={resource_id}"
+    url = f"https://elearning.univ-{university_name}.dz/mod/resource/view.php?id={resource_id}"
     response = session.get(url, stream=True, allow_redirects=True)
     
     if response.url.endswith('.pdf'):
