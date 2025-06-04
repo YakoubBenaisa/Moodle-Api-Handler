@@ -16,7 +16,7 @@ def send_notifications_to_webhook():
         if not notifications:
             return "No new notifications to send."
 
-        # Step 1: Send notifications to the webhook
+        # Send notifications to the webhook
         for notif in notifications:
             try:
                 response = requests.post(
@@ -30,7 +30,7 @@ def send_notifications_to_webhook():
                 )
                 response.raise_for_status()
 
-                # Step 2: After sending, mark the notification as sent
+                # mark the notification as sent
                 notif.sent = True
                 notif.save()
 

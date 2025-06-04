@@ -139,5 +139,18 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-# Webhook URL for sending new notifications
-NOTIFICATION_WEBHOOK_URL = "http://localhost:8001/api/new_notification/"  # adjust this
+# Webhook settings for notifications
+# Make sure this URL points to your Laravel application's webhook endpoint
+NOTIFICATION_WEBHOOK_URL = "http://127.0.0.1:8001/api/webhook/moodle-notification"  # URL to your Laravel webhook endpoint
+WEBHOOK_SECRET_TOKEN = "moodle-notification-secret"  # Secret token for webhook authentication
+
+# Optional: Store default Moodle session cookies for scheduled tasks
+# This is useful for the Celery task that scrapes notifications periodically
+# Format: {"MoodleSession": "your-session-id", "MOODLEID1_": "your-moodle-id"}
+MOODLE_SESSION_COOKIES = None  # Set this in local_settings.py or environment variables
+
+# Try to load local settings if they exist
+try:
+    from .local_settings import *
+except ImportError:
+    pass

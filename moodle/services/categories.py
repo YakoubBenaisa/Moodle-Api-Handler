@@ -6,11 +6,6 @@ def get_categories(session):
     from bs4 import BeautifulSoup
     import os
 
-    '''# If we already have the HTML file, use it directly
-    if os.path.exists("courses.html"):
-        with open("courses.html", "r", encoding="utf-8") as f:
-            html_content = f.read()
-    else:'''
 
     # Otherwise fetch it from the website
     response = session.get("https://elearning.univ-bba.dz/course/index.php")

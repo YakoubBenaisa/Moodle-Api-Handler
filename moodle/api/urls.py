@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import fetch_courses, login, fetch_chapters, fetch_category, fetch_resource, scrape_and_store_notifications
+from .views import (
+    fetch_courses, login, fetch_chapters, fetch_category,
+    fetch_resource, scrape_and_store_notifications, webhook_receiver
+)
 
 urlpatterns = [
     path("login/", login),
@@ -8,4 +11,5 @@ urlpatterns = [
     path("chapters/", fetch_chapters),
     path("resource/", fetch_resource),
     path('notifications/', scrape_and_store_notifications, name='notifications'),
+    path('webhook/notification/', webhook_receiver, name='webhook_notification'),
 ]
